@@ -8,7 +8,7 @@ data "aws_ami" "roboshop" {
     }
 
     filter {
-        name = "architechture"
+        name = "architecture"
         values = ["x86_64"]
     }
 }
