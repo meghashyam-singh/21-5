@@ -11,5 +11,5 @@ output "sg_id" {
 }
 
 output "r53-records" {
-    value = aws_route53_record.roboshop_record[*].name
+    value = aws_route53_record.roboshop_records[*].name
 }
