@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "demo-bucket"
+    bucket = "21-05-bucket"
     region = "us-east-1"
-    key = "tf-statefile/demo"
+    key = "roboshop/terraform-statefile"
     use_lockfile = true
     encrypt = true
   }
