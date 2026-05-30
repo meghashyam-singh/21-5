@@ -8,7 +8,7 @@ resource "aws_vpc" "roboshop_vpc" {
     }
 }
 
-resource "aws_internet_gateway" "roboshop-igw" {
+resource "aws_internet_gateway" "roboshop_igw" {
     vpc_id = aws_vpc.roboshop_vpc.id
     tags = {
         Name = "${local.common_name}-igw"
@@ -76,7 +76,7 @@ resource "aws_eip" "roboshop_eip" {
 }
 
 resource "aws_nat_gateway" "roboshop_nat" {
-    subnet_id = aws_subnet.public.id
+    subnet_id = aws_subnet.public[0].id
     allocation_id = aws_eip.roboshop_eip.id
     depends_on = [ aws_internet_gateway.roboshop_igw ]
     tags = {
