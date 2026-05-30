@@ -13,9 +13,8 @@ resource "aws_internet_gateway" "roboshop_igw" {
     tags = {
         Name = "${local.common_name}-igw"
     }
-
-
 }
+
 resource "aws_subnet" "public" {
     count = length(var.az)
     vpc_id = aws_vpc.roboshop_vpc.id
@@ -32,6 +31,7 @@ resource "aws_subnet" "private" {
     vpc_id = aws_vpc.roboshop_vpc.id
     availability_zone = var.az[count.index]
     cidr_block = var.private_subnet_cidr_block[count.index]
+    map_public_ip_on_launch = true
     tags = {
         Name = "${local.common_name}-private-${var.az[count.index]}"
     }
@@ -42,6 +42,7 @@ resource "aws_subnet" "database" {
     vpc_id = aws_vpc.roboshop_vpc.id
     availability_zone = var.az[count.index]
     cidr_block = var.database_subnet_cidr_block[count.index]
+    map_public_ip_on_launch = true
     tags = {
         Name = "${local.common_name}-database-${var.az[count.index]}"
     }
@@ -79,9 +80,6 @@ resource "aws_nat_gateway" "roboshop_nat" {
     subnet_id = aws_subnet.public[0].id
     allocation_id = aws_eip.roboshop_eip.id
     depends_on = [ aws_internet_gateway.roboshop_igw ]
-    tags = {
-        Name = "${local.common_name}-nat"
-    }
 }
 
 resource "aws_route" "public" {
