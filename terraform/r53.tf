@@ -3,6 +3,6 @@ resource "aws_route53_record" "roboshop_records" {
     count = length(var.instances)
     type = "A"
     ttl = 1
-    name = "${var.instances[count.index]}.${domain_name}"
+    name = "${var.instances[count.index]}.${var.domain_name}"
     records = [aws_instance.roboshop_instances[count.index].private_ip]
 }
