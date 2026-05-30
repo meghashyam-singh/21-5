@@ -52,3 +52,8 @@ variable "instances" {
     type = list(string)
     default = ["mongodb", "redis", "mysql", "rabbitmq"]
 }
+
+variable "domain_name" {
+    type = string
+    default = "devops-project.co.uk"
+}
